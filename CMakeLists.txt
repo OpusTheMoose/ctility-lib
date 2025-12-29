@@ -1,0 +1,37 @@
+
+cmake_minimum_required(VERSION 4.0.0)
+project(solar-system VERSION 0.1.0 LANGUAGES C)
+set(CMAKE_C_STANDARD 23) 
+include(FetchContent)
+
+set (CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR})
+
+
+
+add_executable(ctility main.c src/print.c src/arena.c src/string.c tests/arena_test.c tests/string_test.c)
+install(DIRECTORY include/ctility DESTINATION include)
+install(TARGETS ctility ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
+
+if(WIN32)
+        option(WINDOWS "OS detected as Windows" ON)
+endif()
+option(ENABLE_DEBUG "Enable debug features" ON)
+option(ENABLE_TESTS "Enables testing" OFF)
+if (ENABLE_DEBUG)
+        target_compile_options(ctility PRIVATE -Wall -Wextra -Wpedantic -Werror -g -O0)
+         
+        # target_compile_options(game PRIVATE -Wall -Wextra)
+        target_compile_definitions(ctility PRIVATE ENABLE_DEBUG)
+endif()
+if(ENABLE_TESTS)
+  target_compile_options(ctility PRIVATE -Wall -Wextra -Wpedantic -Werror)
+         
+        # target_compile_options(game PRIVATE -Wall -Wextra)
+        target_compile_definitions(ctility PRIVATE ENABLE_TESTS)
+endif()
+
+
+target_link_libraries(ctility PUBLIC) 
+
+include(CTest)
+enable_testing()
