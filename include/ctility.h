@@ -19,7 +19,7 @@
 #include "types.h"
 #include "arena.h"
 #include "string.h"
-
+#include "array.h"
 typedef enum {
   FATAL,
   WARNING
