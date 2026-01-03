@@ -5,10 +5,10 @@
 
 
 typedef struct {
-  size_t len;
-  size_t capacity;
-  size_t element_size;
-  char* data;
+  size_t len; // Current array length
+  size_t capacity; // Maximum capacity for array
+  size_t element_size; // sizeof(type), usually
+  char* data; // Char* for pointer arthmetic
 
 } Array;
 

@@ -1,5 +1,4 @@
-#include "../include/ctility.h"
-
+#include "../include/print.h"
 
 void cLib_logMessage_(const char* msg, const char* file, i32 line)
 {
@@ -27,3 +26,5 @@ void cLib_errorMessage_(const char* msg, const char* file, i32 line, clib_error_
   }
 }
  
+
+

@@ -1,11 +1,16 @@
 #include "../include/array.h"
-#include "../include/ctility.h"
-
+#include "../include/print.h"
+#include <string.h> // memcpy 
 
 #define ARRAY_INITIAL_CAPACITY 8
 
 Array* array_create(size_t elem_size)
 {
+  if (elem_size == 0)
+  {
+    cLib_errorMessage("Element size is 0 for array, returning NULL", FATAL);
+    return NULL;
+  }
   Array* array = malloc(sizeof(Array));
   array->capacity = ARRAY_INITIAL_CAPACITY;
   array->len = 0;
@@ -52,5 +57,6 @@ void array_free(Array* arr)
    free(arr->data);
    arr->data = NULL;
    free(arr);
+   arr = NULL;
    return;
 }
