@@ -12,6 +12,7 @@ void string_test_concat(void);
 void string_tests(void);
 
 void array_test_create_and_free(void);
+void array_test_pushback(void);
 void array_tests(void);
 
 #endif // !TESTS_H

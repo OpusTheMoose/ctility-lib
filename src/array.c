@@ -2,9 +2,8 @@
 #include "../include/print.h"
 #include <string.h> // memcpy 
 
-#define ARRAY_INITIAL_CAPACITY 8
 
-Array* array_create(size_t elem_size)
+Array* cLib_array_create(size_t elem_size)
 {
   if (elem_size == 0)
   {
@@ -18,21 +17,27 @@ Array* array_create(size_t elem_size)
   array->element_size = elem_size;
   return array;
 }
-void array_pushback(Array *arr, void *elem)
+void cLib_array_pushback(Array *arr, void *elem)
 {
-  if (arr->capacity == 0) 
+  const size_t array_capacity = arr->capacity;
+  const size_t array_length = arr->len;
+  const size_t array_elem_size = arr->element_size;
+  if (array_capacity == 0) 
   {
     cLib_errorMessage("Dynamic array is size 0", FATAL);
     return;
   }
-  
-  void* new_data = arr->data + (arr->element_size * arr->len); 
-  memcpy(new_data, elem, arr->element_size); 
-
+  // Create a pointer to the new position in the data array to add the value 
+  void* new_data = arr->data + (array_elem_size * array_length); 
+  memcpy(new_data, elem, array_elem_size); 
+  // New element added, increase length by 1
   arr->len += 1;
-  if (arr->capacity / 2 < arr->len)
+  // Right shift to divide by 2, left shift to multiply by 2
+  // Not really a needed optimization (compiler probably does the same)
+  if ((array_capacity >> 1) < array_length)
   {
-    char* new_data = realloc(arr->data, arr->capacity * 2);
+    
+    char* new_data = realloc(arr->data, (array_capacity * array_elem_size) << 1);
     if (new_data == NULL)
     {
       cLib_errorMessage("Unable to reallocate memory for array.", FATAL);
@@ -42,7 +47,7 @@ void array_pushback(Array *arr, void *elem)
   }
 
 }
-void* array_get(Array* arr, size_t index)
+void* array_at_type(Array* arr, size_t index)
 {
   if (index > arr->len)
   {
@@ -51,7 +56,7 @@ void* array_get(Array* arr, size_t index)
   }
   return arr->data + (index * arr->element_size); 
 }
-void array_free(Array* arr)
+void cLib_array_free(Array* arr)
 {
    if (arr == NULL) return;
    free(arr->data);
