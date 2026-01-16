@@ -1,5 +1,6 @@
 #include "include/tests.h"
-#include "include/timer.h"
+#include <pthread.h>
+
 int main(void)
 {
    arena_tests();

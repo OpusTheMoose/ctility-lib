@@ -1,8 +1,8 @@
 #include "../include/array.h"
 #include <assert.h>
 #include "../include/print.h"
-#include "../include/timer.h"
 #include "../include/tests.h"
+
 void array_tests(void)
 {
   array_test_create_and_free();
