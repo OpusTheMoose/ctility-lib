@@ -1,6 +1,6 @@
 
 cmake_minimum_required(VERSION 4.0.0)
-project(solar-system VERSION 0.1.0 LANGUAGES C)
+project(ctility VERSION 0.1.0 LANGUAGES C)
 set(CMAKE_C_STANDARD 23) 
 include(FetchContent)
 

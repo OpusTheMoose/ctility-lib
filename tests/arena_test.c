@@ -40,4 +40,10 @@ void arena_test_alloc_aligned(void)
    int* final = (int*)arena_alloc_type(NULL, int);
    assert(final == NULL);
    cLib_logMessage("Test passed | Cannot alloc a NULL arena.");
+
+  Arena* arena1 = arena_create(1024);
+  i32* arena_allocation = (i32*)arena_alloc_type(arena1, i32);
+
+
+  arena_destroy(arena1); 
 }
