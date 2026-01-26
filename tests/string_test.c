@@ -14,7 +14,7 @@ void string_test_concat()
 {
   // Use a static string arena for the following tests. Max size of 1024 bytes
   // Test concat of two regular strings
-  Arena* string_arena = arena_create(1024);
+  Arena* string_arena = cLib_arena_create(1024);
   String s1 = String("Abcde");
   String s2 = String("12345");
   String concat = str_concat(s1, s2, string_arena);
@@ -22,7 +22,7 @@ void string_test_concat()
   String compare1 = String("Abcde12345");
   assert(memcmp(concat.str, compare1.str, 10) == 0);
   cLib_logMessage("Test passed | Concat of two strings");
-  arena_reset(string_arena);
+  cLib_arena_reset(string_arena);
 
   // Concat with a null character should just return the orignial string
   String s3 = String(""); // Empty string 
@@ -33,7 +33,7 @@ void string_test_concat()
   assert(memcmp(concat2.str, compare2.str, 5) == 0);
   cLib_logMessage("Test passed | Concat of empty string and non-empty string.");
 
-  arena_destroy(string_arena);
+  cLib_arena_destroy(string_arena);
 
   
 }

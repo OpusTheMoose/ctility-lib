@@ -1,7 +1,7 @@
 #include "../include/ctility.h"
 #include <stdlib.h>
 
-void arena_init(Arena* arena, void* region, size_t size)
+void cLib_arena_init(Arena* arena, void* region, size_t size)
 {
   if (!arena)
   {
@@ -20,7 +20,8 @@ void arena_init(Arena* arena, void* region, size_t size)
 
 
 }
-Arena* arena_create(size_t size)
+// Specifies the number of bytes you want to allocate
+Arena* cLib_arena_create(size_t size)
 {
   if (size == 0)
   {
@@ -44,14 +45,14 @@ Arena* arena_create(size_t size)
     return NULL;
   }
 
-  arena_init(arena, region, size);
+  cLib_arena_init(arena, region, size);
 
 
 
   return arena;
 }
 
-void* arena_alloc(Arena* arena, size_t size)
+void* cLib_arena_alloc(Arena* arena, size_t size)
 {
   if (size == 0)
   {
@@ -105,13 +106,13 @@ void* arena_alloc_aligned(Arena* arena, size_t size, size_t align)
   return ptr;
  }
 
-void arena_reset(Arena* arena)
+void cLib_arena_reset(Arena* arena)
 {
   if (!arena) return;
   arena->index = 0;
 }
 // Free all data malloc'd with this arena.
-void arena_destroy(Arena* arena)
+void cLib_arena_destroy(Arena* arena)
 {
    
   if (arena != NULL)
