@@ -16,6 +16,12 @@ String str_init(size_t len_, Arena* allocator);
 String str_concat(String  str1, String str2, Arena* allocator);
 // Copy from src_string into dst_string. Only if dst_string has a string buffer >= src buffer
 String str_copy_alloc(const String src_string, Arena* allocator);
+i32 str_cmp(String s1, String s2);
+String str_f32_to_str(float f, Arena* arena);
+String str_f64_to_str(double d);
+
+
+
 
 #endif // !STRING_H
 

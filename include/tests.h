@@ -10,6 +10,7 @@ void arena_tests(void);
 void string_test_init(void);
 void string_test_concat(void);
 void string_test_copy(void);
+void string_test_conversions(void);
 void string_tests(void);
 
 void array_test_create_and_free(void);

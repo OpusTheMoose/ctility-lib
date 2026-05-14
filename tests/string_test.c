@@ -7,6 +7,7 @@ void string_tests()
 {
   string_test_concat();
   string_test_copy();
+  string_test_conversions();
 }
 void string_test_init()
 {
@@ -49,4 +50,13 @@ void string_test_copy()
     cLib_logMessage("Test passed | Copy one string into another");
 
 
+}
+void string_test_conversions(void)
+{
+   Arena* string_arena = cLib_arena_create(1024);
+
+   //String float1 = String("123.45");
+   String float_convert = str_f32_to_str(123.45, string_arena);
+   printf("%s\n", float_convert.str);
+   //assert(str_cmp(float1, str_f32_to_str(123.45)) == 0); 
 }

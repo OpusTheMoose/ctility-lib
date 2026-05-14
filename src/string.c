@@ -1,7 +1,9 @@
 #include "../include/cstring.h"
 #include <assert.h>
+#include <stdio.h>
 #include <string.h>
 
+#define CONVERSION_BUFFER 32
 // A lot of implementation pulled from this article: https://www.bytesbeneath.com/p/custom-strings-in-c
 // (With some changes ;) ) 
 String str_init(size_t len_, Arena* allocator)
@@ -29,5 +31,37 @@ String str_copy_alloc(const String src_string, Arena* allocator){
       String s = str_init(src_string.len, allocator);
      memcpy(s.str, src_string.str, src_string.len); 
      return s;
+}
+
+// Compares two strings. Returns 0 if it's match, negative otherwise
+i32 str_cmp(String s1, String s2)
+{
+  if (s1.len != s2.len) return -1;
+  for (size_t i = 0; i < s1.len; i++)
+  {
+     if (s1.str[i] !=  s2.str[i] ) return -1; 
+  }
+  return 0;
+      
+}
+
+
+// Conversion functions 
+String str_f32_to_str(float f, Arena* alloc)
+{
+  char buf[CONVERSION_BUFFER];
+  snprintf(buf, CONVERSION_BUFFER, "%f", f);
+
+  size_t str_size = strnlen(buf, CONVERSION_BUFFER);
+  String str = str_init(str_size, alloc);
+  strncpy(str.str, buf, str_size);
+  return str; 
+}
+String str_f64_to_str(double d)
+{
+  char buf[32];
+  snprintf(buf, sizeof(buf), "%lf", d); 
+  return String(buf);
+
 }
 
