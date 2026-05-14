@@ -1,4 +1,6 @@
 #include "../include/cstring.h"
+#include <assert.h>
+#include <string.h>
 
 // A lot of implementation pulled from this article: https://www.bytesbeneath.com/p/custom-strings-in-c
 // (With some changes ;) ) 
@@ -21,5 +23,11 @@ String str_concat(String str1, String str2, Arena* allocator)
   memcpy(&s.str[str1.len], str2.str, str2.len);
   return s;
 
+}
+// This copies into an existing string, assuming the string has allocated space 
+String str_copy_alloc(const String src_string, Arena* allocator){
+      String s = str_init(src_string.len, allocator);
+     memcpy(s.str, src_string.str, src_string.len); 
+     return s;
 }
 

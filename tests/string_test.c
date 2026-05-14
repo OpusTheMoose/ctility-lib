@@ -1,10 +1,12 @@
 #include "../include/ctility.h"
 #include "../include/tests.h"
 #include <assert.h>
+#include <string.h>
 
 void string_tests()
 {
   string_test_concat();
+  string_test_copy();
 }
 void string_test_init()
 {
@@ -36,4 +38,15 @@ void string_test_concat()
   cLib_arena_destroy(string_arena);
 
   
+}
+void string_test_copy()
+{
+   Arena* string_arena = cLib_arena_create(1024);
+   String s1 = String("Hello");
+   String s2 = str_copy_alloc(s1, string_arena);
+   assert(s1.len == s2.len); 
+   assert(memcmp(s1.str, s2.str, s1.len) == 0);
+    cLib_logMessage("Test passed | Copy one string into another");
+
+
 }

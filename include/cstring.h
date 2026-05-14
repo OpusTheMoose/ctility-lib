@@ -10,10 +10,12 @@ typedef struct {
    char* str;
    size_t len; // Does NOT include null terminator  
 } String;
-#define String(x) (String){x, strlen(x)}
+#define String(string) (String){string, strlen(string)}
 
 String str_init(size_t len_, Arena* allocator);
 String str_concat(String  str1, String str2, Arena* allocator);
+// Copy from src_string into dst_string. Only if dst_string has a string buffer >= src buffer
+String str_copy_alloc(const String src_string, Arena* allocator);
 
 #endif // !STRING_H
 
