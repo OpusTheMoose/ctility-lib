@@ -30,7 +30,7 @@ if(ENABLE_TESTS)
         target_compile_definitions(ctility PRIVATE ENABLE_TESTS)
 endif()
 
-
+target_include_directories(ctility PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(ctility PUBLIC) 
 
 include(CTest)

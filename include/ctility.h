@@ -9,7 +9,7 @@
 #include <stdio.h>
 #include "types.h"
 #include "arena.h"
-#include "string.h"
+#include "cstring.h"
 #include "array.h"
 #include "print.h"
 #endif

@@ -1,4 +1,4 @@
-#include "../include/string.h"
+#include "../include/cstring.h"
 
 // A lot of implementation pulled from this article: https://www.bytesbeneath.com/p/custom-strings-in-c
 // (With some changes ;) ) 
