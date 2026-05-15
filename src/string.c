@@ -45,6 +45,27 @@ i32 str_cmp(String s1, String s2)
       
 }
 
+// Returns the position of the character if it's in the string, -1 if it's not
+i32 str_find_char(String s, char c)
+{
+   for (size_t i = 0; i < s.len; i++)
+   {
+       if (s.str[i] == c) return i;
+   }
+   return -1;
+}
+
+// Returns a substring with the given start and end pos. Returns an empty string if it finds nothing
+String str_substr(const String s, const size_t start, const size_t len, Arena* alloc)
+{ 
+    if (start + len > s.len || start > s.len) return String("");
+   String string = str_init(len, alloc);
+   memcpy(string.str, &s.str[start], len);
+
+
+   return string;
+}
+
 
 // Conversion functions 
 String str_f32_to_str(float f, Arena* alloc)
