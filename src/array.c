@@ -3,18 +3,23 @@
 #include <string.h> // memcpy 
 
 
-Array* cLib_array_create(size_t elem_size)
+Array cLib_array_create(size_t elem_size)
 {
+
+  Array array; 
+  array.capacity = ARRAY_INITIAL_CAPACITY;
+  array.len = 0;
+  array.element_size = elem_size;
+
   if (elem_size == 0)
   {
-    cLib_errorMessage("Element size is 0 for array, returning NULL", FATAL);
-    return NULL;
+    cLib_errorMessage("Element size is 0 for array, returning empty array", FATAL);
+    array.data = NULL;
+    return array;
   }
-  Array* array = malloc(sizeof(Array));
-  array->capacity = ARRAY_INITIAL_CAPACITY;
-  array->len = 0;
-  array->data = malloc(elem_size * ARRAY_INITIAL_CAPACITY);
-  array->element_size = elem_size;
+  array.data = malloc(elem_size * ARRAY_INITIAL_CAPACITY);
+  
+  
   return array;
 }
 void cLib_array_pushback(Array *arr, void *elem)
@@ -61,7 +66,5 @@ void cLib_array_free(Array* arr)
    if (arr == NULL) return;
    free(arr->data);
    arr->data = NULL;
-   free(arr);
-   arr = NULL;
-   return;
+    return;
 }

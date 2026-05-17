@@ -13,7 +13,7 @@ typedef struct {
 
 } Array;
 
-Array* cLib_array_create(size_t elem_size);
+Array cLib_array_create(size_t elem_size);
 void cLib_array_pushback(Array* arr, void* elem);
 void* array_at_type(Array* arr, size_t index);
 #define cLib_array_at(type, da, index) *(type*)array_at_type(da, index) 

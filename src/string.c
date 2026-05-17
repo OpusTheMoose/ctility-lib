@@ -66,6 +66,13 @@ String str_substr(const String s, const size_t start, const size_t len, Arena* a
    return string;
 }
 
+// Array str_split(String str, const char delim)
+// {
+//     Array array = cLib_array_create(sizeof(String));
+
+//     return array;
+// }
+
 
 // Conversion functions 
 String str_f32_to_str(float f, Arena* alloc)
