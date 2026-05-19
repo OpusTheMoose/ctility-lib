@@ -9,6 +9,7 @@ void string_tests()
   string_test_copy();
   string_test_conversions();
   string_test_substring();
+  string_test_split();
 }
 void string_test_init()
 {
@@ -84,4 +85,31 @@ void string_test_substring(void)
      cLib_logMessage("Test passed | Substr from 0 to len 5 matches");
     
     
+}
+
+void string_test_split(void)
+{
+    Arena* string_arena = cLib_arena_create(1024);
+
+      String test_string = String("Hello, world! This is a test.");
+      Array split = str_split(test_string, string_arena, ' ');
+      
+      assert(split.len == 6);
+      String s1 = ((String*)split.data)[0];
+      String s2 = ((String*)split.data)[1];
+      String s3 = ((String*)split.data)[2];
+      String s4 = ((String*)split.data)[3];
+      String s5 = ((String*)split.data)[4];
+      String s6 = ((String*)split.data)[5];
+ 
+      assert(str_cmp(s1, String("Hello,")) == 0);
+      assert(str_cmp(s2, String("world!")) == 0);
+      assert(str_cmp(s3, String("This")) == 0);
+      assert(str_cmp(s4, String("is")) == 0);
+      assert(str_cmp(s5, String("a")) == 0);
+      assert(str_cmp(s6, String("test.")) == 0);
+  
+        cLib_logMessage("Test passed | Split string by space character");
+  
+        cLib_arena_destroy(string_arena); 
 }

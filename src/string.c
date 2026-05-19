@@ -66,12 +66,24 @@ String str_substr(const String s, const size_t start, const size_t len, Arena* a
    return string;
 }
 
-// Array str_split(String str, const char delim)
-// {
-//     Array array = cLib_array_create(sizeof(String));
+Array str_split(String str, Arena* alloc, const char delim)
+{
+    Array array = cLib_array_create(sizeof(String));
+    size_t last_found_match = 0;
+    for (size_t i = 0; i < str.len; i++)
+    {
+       if (delim == str.str[i])
+       {
+           String s = str_substr(str, last_found_match, i - last_found_match, alloc);
+           cLib_array_pushback(&array, &s); 
+           last_found_match = i +  1; 
+       }
+    } 
+    String final_substring = str_substr(str, last_found_match, str.len - last_found_match, alloc);
+    cLib_array_pushback(&array, &final_substring);
 
-//     return array;
-// }
+    return array;
+}
 
 
 // Conversion functions 
