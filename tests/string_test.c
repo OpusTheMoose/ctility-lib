@@ -115,7 +115,7 @@ void string_test_contain(void)
     assert(str_contain(test_string, substr1) == 7);
     cLib_logMessage("Test passed | Substring is contained in the string");
 
-    assert(str_contain(test_string, substr2) == 0);
+    assert(str_contain(test_string, substr2) == -1);
     cLib_logMessage("Test passed | Substring is not contained in the string");
 
     cLib_arena_destroy(string_arena);

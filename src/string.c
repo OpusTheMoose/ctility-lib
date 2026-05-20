@@ -101,8 +101,8 @@ static size_t max(size_t a, size_t b)
 {
     return (a > b) ? a : b;
 }
-//  Uses Boyer-Moore search algorithm to find the position of the substring. Returns 0 if it's not found
-u32 str_contain(const String str_to_search, const String substr)
+//  Uses Boyer-Moore search algorithm to find the position of the substring. Returns -1 if it's not found
+i32 str_contain(const String str_to_search, const String substr)
 {
 
   size_t m = substr.len;
@@ -128,7 +128,7 @@ u32 str_contain(const String str_to_search, const String substr)
         s += max(1, j - bad_char_table[(unsigned char)str_to_search.str[s + j]]);
     }
   }
-  return 0; // Not found
+  return -1; // Not found
     
 }
 
