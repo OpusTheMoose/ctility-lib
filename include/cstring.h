@@ -19,6 +19,7 @@ String str_concat(String  str1, String str2, Arena* allocator);
 String str_copy_alloc(const String src_string, Arena* allocator);
 String str_substr(const String s, size_t const start_pos, const size_t length, Arena* allocator);
 Array str_split(String str, Arena* alloc, const char delim);
+u32 str_contain(const String str_to_search, const String substr);
 i32 str_cmp(String s1, String s2);
 i32 str_find_char(String s, char c);
 String str_f32_to_str(float f, Arena* arena);

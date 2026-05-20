@@ -85,6 +85,53 @@ Array str_split(String str, Arena* alloc, const char delim)
     return array;
 }
 
+static void bad_char_heuristic(const String pattern, i32 bad_char_table[256])
+{
+    for (size_t i = 0; i < 256; i++)
+    {
+        bad_char_table[i] = -1;
+    }
+    for (size_t i = 0; i < pattern.len; i++)
+    {
+        bad_char_table[(unsigned char)pattern.str[i]] = i;
+    }
+}
+
+static size_t max(size_t a, size_t b)
+{
+    return (a > b) ? a : b;
+}
+//  Uses Boyer-Moore search algorithm to find the position of the substring. Returns 0 if it's not found
+u32 str_contain(const String str_to_search, const String substr)
+{
+
+  size_t m = substr.len;
+  size_t n = str_to_search.len;
+  if (m == 0 || n == 0 || m > n) return 0;
+  i32 bad_char_table[256];
+  bad_char_heuristic(substr, bad_char_table);
+
+  size_t s = 0;
+  while (s <= n - m)
+  {
+    i32 j = m - 1;
+    while (j >= 0 && substr.str[j] == str_to_search.str[s + j])
+    {
+        j--;
+    }
+    if (j < 0)
+    {
+        return s; // Found at position s
+    }
+    else
+    {
+        s += max(1, j - bad_char_table[(unsigned char)str_to_search.str[s + j]]);
+    }
+  }
+  return 0; // Not found
+    
+}
+
 
 // Conversion functions 
 String str_f32_to_str(float f, Arena* alloc)

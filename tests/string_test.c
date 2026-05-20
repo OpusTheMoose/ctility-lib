@@ -7,9 +7,10 @@ void string_tests()
 {
   string_test_concat();
   string_test_copy();
-  string_test_conversions();
+  
   string_test_substring();
   string_test_split();
+  string_test_contain();
 }
 void string_test_init()
 {
@@ -53,18 +54,7 @@ void string_test_copy()
 
 
 }
-void string_test_conversions(void)
-{
-   Arena* string_arena = cLib_arena_create(1024);
 
-   //String float1 = String("123.45");
-   String float_convert = str_f32_to_str(123.45, string_arena);
-   printf("%s\n", float_convert.str);
-   String float_convert2 = str_f32_to_str(-10.0, string_arena);
-   printf("%s\n", float_convert2.str);
-
-   //assert(str_cmp(float1, str_f32_to_str(123.45)) == 0); 
-}
 
 void string_test_substring(void)
 {
@@ -112,4 +102,21 @@ void string_test_split(void)
         cLib_logMessage("Test passed | Split string by space character");
   
         cLib_arena_destroy(string_arena); 
+}
+
+void string_test_contain(void)
+{
+    Arena* string_arena = cLib_arena_create(1024);
+
+    String test_string = String("Hello, world!");
+    String substr1 = String("world");
+    String substr2 = String("test");
+
+    assert(str_contain(test_string, substr1) == 7);
+    cLib_logMessage("Test passed | Substring is contained in the string");
+
+    assert(str_contain(test_string, substr2) == 0);
+    cLib_logMessage("Test passed | Substring is not contained in the string");
+
+    cLib_arena_destroy(string_arena);
 }

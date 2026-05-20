@@ -18,21 +18,10 @@ install(TARGETS ctility-lib ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
 if(WIN32)
         option(WINDOWS "OS detected as Windows" ON)
 endif()
-option(ENABLE_DEBUG "Enable debug features" ON)
-option(ENABLE_TESTS "Enables testing" OFF)
-if (ENABLE_DEBUG)
-        target_compile_options(ctility PRIVATE -Wall -Wextra -Wpedantic -Werror -g -O0)
-         
-        # target_compile_options(game PRIVATE -Wall -Wextra)
-        target_compile_definitions(ctility PRIVATE ENABLE_DEBUG)
-endif()
-if(ENABLE_TESTS)
-  target_compile_options(ctility PRIVATE -Wall -Wextra -Wpedantic -Werror)
-         
-        # target_compile_options(game PRIVATE -Wall -Wextra)
-        target_compile_definitions(ctility PRIVATE ENABLE_TESTS)
-endif()
 
+
+target_compile_options(ctility PRIVATE -Wall -Wextra -Wpedantic -Werror -g -O3)
+         
 target_include_directories(ctility-lib PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
 target_link_libraries(ctility PUBLIC) 
 
